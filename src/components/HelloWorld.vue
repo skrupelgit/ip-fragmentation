@@ -4,11 +4,14 @@
       <div v-for="(red, index) in redes" :key="index">
         <div style="    display: flex;
     flex-direction: column;
-    align-items: start;">
+    align-items: center;">
           <div>Red {{index}}</div>
           <div>
-            <img width="50px" src="https://live.staticflickr.com/6075/6125187969_b1de083e66_n.jpg" />
-            <span v-show="index < redes.length-1">&lt;-----&gt;</span>
+            <span v-if="index==0"><img width="50px" src="../assets/pcA.png"></span>
+            <img v-else width="50px" src="https://live.staticflickr.com/6075/6125187969_b1de083e66_n.jpg" />
+            <span >------------</span>
+            <span v-if="index ===redes.length-1"><img width="50px" src="../assets/pcB.png"></span>
+
           </div>
           <div>
             <label>
@@ -23,10 +26,10 @@
       <button @click="newRed">Añadir red</button>
     </div>
     <div>
-      Realizar ping Red 0 -> Red {{redes.length-1}}
+      Enviar paquete A -> B
       <br />
       <label>
-        Tamaño del paquete*
+        Tamaño del paquete
         <input type="number" v-model.number="size" />
       </label>
       Protocolo
@@ -40,7 +43,6 @@
       <input type="radio" value="6" v-model="protocol">
 
       </label>
-      <br />*Se obvia cabecera del ping (8 bytes)
       <button @click="calcular">Calcular</button>
     </div>
     <div>
@@ -70,7 +72,7 @@ export default {
 
       header: {
         "4":20,
-        "6":40
+        "6":48
       },
       results: []
     };
