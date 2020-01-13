@@ -96,7 +96,7 @@ export default {
           }
           let n_paquetes = parseInt(prevResult.size / max_size);
           let offset = max_size / 8;
-          let packetLeft = this.size;
+          let packetLeft = prevResult.size;
           let ite_offeset = prevResult.offset;
 
           for (let i = 0; i <= n_paquetes; i++) {
