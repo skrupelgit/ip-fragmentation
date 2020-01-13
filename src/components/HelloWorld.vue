@@ -72,7 +72,7 @@ export default {
 
       header: {
         "4":20,
-        "6":48
+        "6":40
       },
       results: []
     };
@@ -129,12 +129,16 @@ export default {
         return this.redes[red].mtu
       }
       else{
-        let minMtu=Infinity
+       
+          return this.getMinMtu();
+      }
+    },
+    getMinMtu(){
+         let minMtu=Infinity
           for(let i in this.redes ){
             if(this.redes[i].mtu<minMtu) minMtu=this.redes[i].mtu;
           }
           return minMtu;
-      }
     },
     calcular() {
       this.results = [];
@@ -171,6 +175,11 @@ export default {
   },
   computed:{
     cabecera(){
+      if(this.protocol==="6"){
+        if(this.getMinMtu()<this.size+ this.header[this.protocol]){
+          return this.header[this.protocol]+8 //Fragmentation header
+        }
+      }
       return this.header[this.protocol]
     }
   }
